@@ -1,4 +1,5 @@
 const Task = require("../models/Task");
+const publisher = require("../config/redis");
 
 const createTask = async (req, res) => {
   try {
@@ -7,8 +8,19 @@ const createTask = async (req, res) => {
       userId: req.user.userId
     });
 
+    await publisher.publish(
+      "task-events",
+      JSON.stringify({
+        event: "TASK_CREATED",
+        taskId: task._id.toString(),
+        title: task.title
+      })
+    );
+
     res.status(201).json(task);
   } catch (error) {
+    console.error("CREATE TASK ERROR:", error);
+
     res.status(500).json({
       message: error.message
     });
@@ -23,6 +35,8 @@ const getTasks = async (req, res) => {
 
     res.json(tasks);
   } catch (error) {
+    console.error("GET TASKS ERROR:", error);
+
     res.status(500).json({
       message: error.message
     });
@@ -46,8 +60,19 @@ const updateTask = async (req, res) => {
 
     await task.save();
 
+    await publisher.publish(
+      "task-events",
+      JSON.stringify({
+        event: "TASK_UPDATED",
+        taskId: task._id.toString(),
+        title: task.title
+      })
+    );
+
     res.json(task);
   } catch (error) {
+    console.error("UPDATE TASK ERROR:", error);
+
     res.status(500).json({
       message: error.message
     });
@@ -67,12 +92,23 @@ const deleteTask = async (req, res) => {
       });
     }
 
+    await publisher.publish(
+      "task-events",
+      JSON.stringify({
+        event: "TASK_DELETED",
+        taskId: task._id.toString(),
+        title: task.title
+      })
+    );
+
     await task.deleteOne();
 
     res.json({
       message: "Task deleted successfully"
     });
   } catch (error) {
+    console.error("DELETE TASK ERROR:", error);
+
     res.status(500).json({
       message: error.message
     });
