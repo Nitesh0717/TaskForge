@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task-service
+  template:
+    metadata:
+      labels:
+        app: task-service
+    spec:
+      containers:
+      - name: task-service
+        image: taskforge-task:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5001
+        env:
+        - name: MONGO_URI
+          value: mongodb://mongodb:27017/taskforge-task
+        - name: REDIS_HOST
+          value: redis
+        - name: JWT_SECRET
+          value: taskforge-super-secret-key
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-service
+spec:
+  selector:
+    app: task-service
+  ports:
+  - port: 5001
+    targetPort: 5001

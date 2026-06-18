@@ -12,7 +12,7 @@ app.use(cors());
 app.use(
   "/api/auth",
   createProxyMiddleware({
-    target: process.env.AUTH_SERVICE_URL,
+    target: "http://auth-service:5000",
     changeOrigin: true,
     pathRewrite: (path) => {
       return "/api/auth" + path;
@@ -23,7 +23,7 @@ app.use(
 app.use(
   "/api/tasks",
   createProxyMiddleware({
-    target: process.env.TASK_SERVICE_URL,
+    target: "http://task-service:5001",
     changeOrigin: true,
     pathRewrite: (path) => {
       return "/api/tasks" + path;
