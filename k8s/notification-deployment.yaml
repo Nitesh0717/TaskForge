@@ -19,8 +19,8 @@ spec:
         ports:
         - containerPort: 5002
         env:
-        - name: REDIS_HOST
-          value: redis
+        - name: REDIS_URL
+          value: redis://redis:6379
 
 ---
 apiVersion: v1
