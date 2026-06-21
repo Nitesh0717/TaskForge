@@ -2,10 +2,15 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const client = require("prom-client");
 
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
+
+client.collectDefaultMetrics();
+
+const register = client.register;
 
 app.use(cors());
 
@@ -36,6 +41,11 @@ app.get("/health", (req, res) => {
     service: "api-gateway",
     status: "healthy"
   });
+});
+
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", register.contentType);
+  res.end(await register.metrics());
 });
 
 const PORT = process.env.PORT || 8080;
