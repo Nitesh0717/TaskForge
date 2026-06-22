@@ -10,70 +10,71 @@ on:
       - main
 
 jobs:
+
   build-auth-service:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install Auth Dependencies
-        run: |
+      - run: |
           cd services/auth-service
           npm install
+
+      - run: |
+          docker build -t auth-service ./services/auth-service
 
   build-task-service:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install Task Dependencies
-        run: |
+      - run: |
           cd services/task-service
           npm install
+
+      - run: |
+          docker build -t task-service ./services/task-service
 
   build-notification-service:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install Notification Dependencies
-        run: |
+      - run: |
           cd services/notification-service
           npm install
+
+      - run: |
+          docker build -t notification-service ./services/notification-service
 
   build-api-gateway:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Install Gateway Dependencies
-        run: |
+      - run: |
           cd services/api-gateway
           npm install
+
+      - run: |
+          docker build -t api-gateway ./services/api-gateway
