@@ -1,13 +1,15 @@
 import HeroSection from "../components/dashboard/HeroSection";
 import StatsCards from "../components/cards/StatsCards";
 
-import InfrastructureMap from "../components/dashboard/InfrastructureMap";
+import ClusterTopology from "../components/dashboard/ClusterTopology";
+import DeploymentTimelinePro from "../components/dashboard/DeploymentTimelinePro";
+
 import HealthGauges from "../components/dashboard/HealthGauges";
 import ActivityFeed from "../components/dashboard/ActivityFeed";
 import AlertsPanel from "../components/dashboard/AlertsPanel";
 
 import ResourceUsageChart from "../components/charts/ResourceUsageChart";
-import PodStatusTable from "../components/dashboard/PodStatusTable";
+import PodExplorer from "../components/dashboard/PodExplorer";
 
 export default function Dashboard() {
   return (
@@ -20,7 +22,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-12 gap-6">
 
         <div className="col-span-8">
-          <InfrastructureMap />
+          <ClusterTopology />
         </div>
 
         <div className="col-span-4">
@@ -32,7 +34,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-12 gap-6">
 
         <div className="col-span-8">
-          <ResourceUsageChart />
+          <DeploymentTimelinePro />
         </div>
 
         <div className="col-span-4">
@@ -44,7 +46,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-12 gap-6">
 
         <div className="col-span-8">
-          <PodStatusTable />
+          <ResourceUsageChart />
         </div>
 
         <div className="col-span-4">
@@ -52,6 +54,8 @@ export default function Dashboard() {
         </div>
 
       </div>
+
+      <PodExplorer />
 
     </div>
   );

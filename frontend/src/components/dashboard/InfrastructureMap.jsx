@@ -1,5 +1,5 @@
 import {
-  Github,
+  GitBranch,
   Workflow,
   Container,
   Server,
@@ -23,7 +23,7 @@ export default function InfrastructureMap() {
 
       <div className="grid grid-cols-6 gap-4">
 
-        <PipelineCard icon={<Github />} label="GitHub" />
+        <PipelineCard icon={<GitBranch />} label="GitHub" />
         <PipelineCard icon={<Workflow />} label="Actions" />
         <PipelineCard icon={<Container />} label="Docker" />
         <PipelineCard icon={<Server />} label="Kubernetes" />
