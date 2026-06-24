@@ -34,23 +34,24 @@ const cards = [
 
 export default function StatsCards() {
   return (
-    <div className="grid grid-cols-4 gap-6 mt-6">
+    <div className="grid grid-cols-4 gap-6">
       {cards.map((card, i) => (
         <div
           key={i}
           className="
-            bg-white/5
+            bg-[#111827]/80
             backdrop-blur-xl
-            border border-white/10
+            border
+            border-slate-800
             rounded-3xl
             p-6
-            hover:scale-105
+            hover:border-cyan-500/50
+            hover:scale-[1.02]
             transition-all
-            duration-300
           "
         >
           <card.icon
-            size={36}
+            size={34}
             className={card.color}
           />
 
