@@ -1,49 +1,50 @@
 const logs = [
   {
+    title: "auth-service deployed",
     time: "21:48",
-    event: "auth-service deployed",
-    status: "success",
   },
   {
+    title: "Docker image pushed",
     time: "21:46",
-    event: "Docker image pushed",
-    status: "success",
   },
   {
+    title: "GitHub Action completed",
     time: "21:44",
-    event: "GitHub Action completed",
-    status: "success",
   },
   {
+    title: "Prometheus scrape healthy",
     time: "21:41",
-    event: "Prometheus scrape healthy",
-    status: "success",
   },
 ];
 
 export default function ActivityFeed() {
   return (
-    <div className="bg-[#111827]/80 rounded-3xl border border-slate-800 p-6 h-full">
-
-      <h2 className="text-xl font-bold mb-6">
+    <div
+      className="
+      bg-[#111827]/80
+      border
+      border-slate-800
+      rounded-3xl
+      p-6
+      "
+    >
+      <h2 className="text-2xl font-bold mb-6">
         Live Activity Stream
       </h2>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
 
-        {logs.map((log, index) => (
+        {logs.map((log) => (
           <div
-            key={index}
-            className="flex items-start gap-3"
+            key={log.title}
+            className="flex gap-4"
           >
             <div className="w-3 h-3 rounded-full bg-green-400 mt-2" />
 
             <div>
-              <p className="font-medium">
-                {log.event}
-              </p>
+              <p>{log.title}</p>
 
-              <span className="text-xs text-slate-400">
+              <span className="text-slate-400 text-sm">
                 {log.time}
               </span>
             </div>
